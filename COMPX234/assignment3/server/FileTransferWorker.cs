@@ -44,7 +44,6 @@ public class FileTransferWorker
 				//Wait for message from client
 				job.ClientEndpoint = new IPEndPoint(IPAddress.Any, 0);
 				string command = Encoding.ASCII.GetString(job.TransferSocket.Receive(ref job.ClientEndpoint)).Trim();
-				Console.WriteLine("ECHO RCV: \"" + command + "\""); //TEST
 				string message = "FILE " + job.Filename + " ";
 				//Check request type
 				if(command.StartsWith("FILE " + job.Filename + " GET START "))
@@ -78,7 +77,6 @@ public class FileTransferWorker
 							//Send message
 							byte[] bytes = Encoding.ASCII.GetBytes(message);
 							job.TransferSocket.Send(bytes, bytes.Length, job.ClientEndpoint);
-							Console.WriteLine("ECHO SND: \"" + message + "\""); //TEST
 						}
 					}
 				}
